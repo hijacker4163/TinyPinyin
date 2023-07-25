@@ -1,5 +1,11 @@
 import java.text.SimpleDateFormat
 
+//apply plugin: 'com.android.library'
+
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.hijacker4163'
+
 apply plugin: 'java'
 apply plugin: 'me.champeau.gradle.jmh'
 apply plugin: 'maven-publish'
@@ -71,7 +77,6 @@ afterEvaluate {
         publications {
             // Creates a Maven publication called "release".
             release(MavenPublication) {
-                from components.release
                 groupId = 'com.github.hijacker4163'
                 artifactId = 'TinyPinyin'
                 version = '2.0.3'
