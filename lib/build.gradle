@@ -66,7 +66,19 @@ dependencies {
     jmh 'org.openjdk.jmh:jmh-generator-annprocess:0.9'
 }
 
-
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.hijacker4163'
+                artifactId = 'TinyPinyin'
+                version = '2.0.3'
+            }
+        }
+    }
+}
 
 // custom tasks for creating source/javadoc jars
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -84,22 +96,22 @@ artifacts {
     archives sourcesJar, javadocJar
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            if (plugins.hasPlugin('war')) {
-                from components.web
-            } else {
-                from components.java
-            }
+// publishing {
+//     publications {
+//         mavenJava(MavenPublication) {
+//             if (plugins.hasPlugin('war')) {
+//                 from components.web
+//             } else {
+//                 from components.java
+//             }
 
-            artifact sourcesJar
-            artifact javadocJar
+//             artifact sourcesJar
+//             artifact javadocJar
 
-            artifactId 'tinypinyin'
-        }
-    }
-}
+//             artifactId 'tinypinyin'
+//         }
+//     }
+// }
 
 bintray {
     user = bintray_user
